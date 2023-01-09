@@ -5,10 +5,11 @@
 
 #define MAX_CMD_SIZE 200
 
-static enum commands
+enum commands
 {
    INVALID,
    INFO,
+   HELP,
    EXIT
 };
 
@@ -17,6 +18,13 @@ static std::map<std::string, commands> strToCommandMap;
 static void getBuildInfo()
 {
    std::cout << "Build Timestamp: " << timestamp << std::endl << std::endl;
+}
+
+static void getHelp()
+{
+   std::cout << "info: Gets the build info" << std::endl;
+   std::cout << "help: Gets information about usable commands" << std::endl;
+   std::cout << "exit: Exits the application" << std::endl << std::endl;
 }
 
 static void invalidCmd()
@@ -30,6 +38,7 @@ int main(int, char**)
 
    // Make char* to command map
    strToCommandMap["info"] = commands::INFO;
+   strToCommandMap["help"] = commands::HELP;
    strToCommandMap["exit"] = commands::EXIT;
 
    std::string cmd;
@@ -47,6 +56,9 @@ int main(int, char**)
       {
          case commands::INFO:
             getBuildInfo();
+            break;
+         case commands::HELP:
+            getHelp();
             break;
          case commands::EXIT:
             return 0;
