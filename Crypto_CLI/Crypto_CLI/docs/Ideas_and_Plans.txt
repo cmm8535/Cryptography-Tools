@@ -1,0 +1,61 @@
+Disclaimer:
+
+This project was never intended to be used for actual security, so I will likely
+implement things in a such a way that causes vulabilities.
+
+Additionally I do not consider a user's misuse to be a vulability (I make this
+distinction because I want to, as long as I can figure out how to, allow the user
+to have as much control over the parameters of these cryptographic schemes as
+possible regardless of it is secure or not. This is to allow for experimation
+and learing, specifically for myself).
+
+That said, if there is a legitimate vulability in the code that allows for
+behavior that shouldn't happen (such as an implementation error), then
+I will likely try to fix it if I'm aware of it.
+
+Ideas:
+
+High Level of Detail:
+
+-Have encryption, decryption, signing, and verifying algorithms that use
+ arbitrary user defined parameters within reason (for example, allowing
+ any encryption scheme, that is implemented of course, to do signing).
+
+-Have key generation, splitting, and combining algorithms.
+
+Medium Level of Detail:
+
+-Implement at least one CSPRNG (also should abstract the concept of a CSPRNG in the code
+ to allow for modularity and add a wrapper for native or common C++ CSPRNGs).
+
+-Implement a cryptographically secure hash function (probably a version of SHA, but will still
+ abstract it).
+
+*Implement a lattice based encryption scheme
+
+Specific:
+
+-Basic number theory functions (primality testing, prime generating,
+ totient, extended euclidean algorithm, etc.).
+
+*An abstracted concept of algebraic structures (specifically groups and fields, but maybe more)
+ that allows for modularity (as many cryptographic schemes allow for arbitrary groups/fields,
+ specific requirements aside, so I want to see what can be used and what can't. Would like
+ to have the ability to define these structures using a common pattern and allow the computer
+ to do the rest of the heavy lifting (likely won't be very efficent though, so if a structure
+ will be used enough, it will likely be defined explicitally as a native).
+
+-Add RSA encryption (over a general group if possible. Obviously it works using integer fields,
+ but I wonder what else can work without being completely unsecure).
+
+-Add AES encryption (will not be particually fun, but I've never actually implemented this
+ completely before even though I've done all of it's operations by hand. Doubtful I will
+ do DES as it is not only obsolete, it is a pain, but maybe solely for the purposes
+ of simulate the posabilities of running it backwards just so my computer can feel
+ the same pain I did in my intro to cryptography class).
+
+-Add ECC encryption (where the elliptic curve is generated from a general field if possible).
+
+*SSS key splitting/combining (with an arbitrary field).
+
+(*) These are the things I specifically want to work on, even if it is difficult.
